@@ -587,7 +587,8 @@ async function flush(){
       const { error } = await sb.from('agents_board_fields')
         .upsert({ field:f, value:v, author:me, updated_at:new Date().toISOString() });
       if(error) continue;
-      sb.from('agents_board_history').insert({ field:f, value:v, author:me });
+      // must be awaited: a supabase query only fires when it is awaited
+      await sb.from('agents_board_history').insert({ field:f, value:v, author:me });
       if(pending.get(f) === v){            // nothing newer typed while it was in flight
         pending.delete(f); dirty.delete(f); draftClear(f);
         const st = fldEl(f) && fldEl(f).querySelector('.fstat');
