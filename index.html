@@ -162,12 +162,42 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
 .lockbtn{background:none;border:0;color:var(--ink-3);font:inherit;font-size:11px;cursor:pointer;
   text-decoration:underline;padding:6px}
 .lockbtn:hover,.lockbtn:focus-visible{color:var(--sky)}
+
+#saved{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 8px;border-radius:999px;border:1px solid transparent}
+#saved.ok{color:var(--ok);border-color:rgba(55,196,143,.4)}
+#saved.warn{color:var(--amber);border-color:rgba(255,138,61,.55);background:rgba(255,138,61,.1)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);z-index:70;
+  background:var(--panel-2);border:1px solid var(--line);color:var(--ink);border-radius:10px;
+  padding:10px 16px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.imgwrap{margin:12px 0 2px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.imgs{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+.imgs:empty{display:none}
+.imgs figure{margin:0;position:relative;width:104px}
+.imgs img{width:104px;height:78px;object-fit:cover;border-radius:8px;border:1px solid var(--line);
+  display:block;cursor:zoom-in;background:var(--panel-2)}
+.imgs figcaption{font-family:var(--mono);font-size:9px;color:var(--ink-3);margin-top:3px;
+  display:flex;justify-content:space-between;gap:4px;align-items:center}
+.imgdel{background:none;border:0;color:var(--ink-3);font:inherit;font-size:9px;cursor:pointer;
+  text-decoration:underline;padding:4px;min-height:24px}
+.imgdel:hover,.imgdel:focus-visible{color:var(--bad)}
+.addimg{background:transparent;border:1px dashed var(--line);color:var(--ink-2);font:inherit;
+  font-size:11.5px;padding:7px 12px;border-radius:8px;cursor:pointer;min-height:32px}
+.addimg:hover,.addimg:focus-visible{border-color:var(--sky);color:var(--sky)}
+.imghint{font-family:var(--mono);font-size:9.5px;color:var(--ink-3)}
+.opt.dropping{outline:2px dashed var(--sky);outline-offset:3px}
+#lightbox{position:fixed;inset:0;z-index:80;background:rgba(4,10,22,.92);display:none;
+  place-items:center;padding:28px;cursor:zoom-out}
+#lightbox.on{display:grid}
+#lightbox img{max-width:100%;max-height:100%;border-radius:10px}
+.fstat.recovered{color:var(--amber)}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Sora:wght@400..800&family=IBM+Plex+Mono:wght@400;600&family=Hanken+Grotesk:wght@400;600&display=swap">
 
 <div class="bar"><div class="wrap">
   <b>MPower Agents · Mood Board</b>
-  <span id="sync">local view</span>
+  <span id="sync">local view</span><span id="saved" class="ok">all saved</span>
   <div class="live" id="peers"></div>
   <div class="live" id="who">
     <span class="whoq">You are</span>
@@ -177,6 +207,8 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
   </div>
   <button class="swap" id="swap" type="button" hidden>not you?</button><button class="lockbtn" id="lockit" type="button">lock</button>
 </div></div>
+<div id="lightbox"><img alt="enlarged reference"></div>
+<div id="toast" role="status" aria-live="polite"></div>
 <div id="gate" hidden>
   <form id="gateform">
     <b>MPower Agents · Mood Board</b>
@@ -210,19 +242,19 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
     <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
       <div class="opt"><div class="meta">
         <p><b>The hub · mpoweragents.ai</b> introduces the three of us, links each personal site, carries the shared proof, and books calls through the GoHighLevel calendar. MPower Sourcing appears as a backlink and a testimonial, not as the identity.</p>
-        <div class="fields"><div class="fld" data-field="hub.carries"><label for="f_hub.carries">What the hub carries</label><textarea id="f_hub.carries" maxlength="4000" placeholder="The shared proof, the three of us, the booking calendar"></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div></div><details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="page-hub"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="page-hub">Add</button></div></details>
+        <div class="fields"><div class="fld" data-field="hub.carries"><label for="f_hub.carries">What the hub carries</label><textarea id="f_hub.carries" maxlength="4000" placeholder="The shared proof, the three of us, the booking calendar"></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div></div><div class="imgwrap"><div class="imgs" data-imgs="page-hub"></div><button type="button" class="addimg" data-for="page-hub">Add image</button><span class="imghint">or paste a screenshot here</span></div><details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="page-hub"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="page-hub">Add</button></div></details>
       </div></div>
       <div class="opt"><div class="meta">
         <p><b>Jordan's page</b> · his services, his prices, and every website he has worked on as a portfolio.</p>
-        <div class="fields"><div class="fld" data-field="jordan.services"><label for="f_jordan.services">Services Jordan offers</label><textarea id="f_jordan.services" maxlength="4000" placeholder="Jordan, list what you sell. One per line."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="jordan.prices"><label for="f_jordan.prices">Prices</label><textarea id="f_jordan.prices" maxlength="4000" placeholder="What each service costs. Ranges are fine."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="jordan.work"><label for="f_jordan.work">Past work for the portfolio</label><textarea id="f_jordan.work" maxlength="4000" placeholder="Sites, builds and clients, with links where you have them."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div></div><details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="page-jordan"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="page-jordan">Add</button></div></details>
+        <div class="fields"><div class="fld" data-field="jordan.services"><label for="f_jordan.services">Services Jordan offers</label><textarea id="f_jordan.services" maxlength="4000" placeholder="Jordan, list what you sell. One per line."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="jordan.prices"><label for="f_jordan.prices">Prices</label><textarea id="f_jordan.prices" maxlength="4000" placeholder="What each service costs. Ranges are fine."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="jordan.work"><label for="f_jordan.work">Past work for the portfolio</label><textarea id="f_jordan.work" maxlength="4000" placeholder="Sites, builds and clients, with links where you have them."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div></div><div class="imgwrap"><div class="imgs" data-imgs="page-jordan"></div><button type="button" class="addimg" data-for="page-jordan">Add image</button><span class="imghint">or paste a screenshot here</span></div><details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="page-jordan"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="page-jordan">Add</button></div></details>
       </div></div>
       <div class="opt"><div class="meta">
         <p><b>Rafael's page</b> · same structure, his own services, prices and portfolio. Rafael writes what goes here.</p>
-        <div class="fields"><div class="fld" data-field="rafael.services"><label for="f_rafael.services">Services Rafael offers</label><textarea id="f_rafael.services" maxlength="4000" placeholder="Rafael, list what you sell. One per line."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="rafael.prices"><label for="f_rafael.prices">Prices</label><textarea id="f_rafael.prices" maxlength="4000" placeholder="What each service costs. Ranges are fine."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="rafael.work"><label for="f_rafael.work">Past work for the portfolio</label><textarea id="f_rafael.work" maxlength="4000" placeholder="Sites, builds and clients, with links where you have them."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div></div><details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="page-rafael"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="page-rafael">Add</button></div></details>
+        <div class="fields"><div class="fld" data-field="rafael.services"><label for="f_rafael.services">Services Rafael offers</label><textarea id="f_rafael.services" maxlength="4000" placeholder="Rafael, list what you sell. One per line."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="rafael.prices"><label for="f_rafael.prices">Prices</label><textarea id="f_rafael.prices" maxlength="4000" placeholder="What each service costs. Ranges are fine."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="rafael.work"><label for="f_rafael.work">Past work for the portfolio</label><textarea id="f_rafael.work" maxlength="4000" placeholder="Sites, builds and clients, with links where you have them."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div></div><div class="imgwrap"><div class="imgs" data-imgs="page-rafael"></div><button type="button" class="addimg" data-for="page-rafael">Add image</button><span class="imghint">or paste a screenshot here</span></div><details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="page-rafael"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="page-rafael">Add</button></div></details>
       </div></div>
       <div class="opt"><div class="meta">
         <p><b>Jay's page</b> · same structure, his own services, prices and portfolio. Jay writes what goes here.</p>
-        <div class="fields"><div class="fld" data-field="jay.services"><label for="f_jay.services">Services Jay offers</label><textarea id="f_jay.services" maxlength="4000" placeholder="Jay, list what you sell. One per line."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="jay.prices"><label for="f_jay.prices">Prices</label><textarea id="f_jay.prices" maxlength="4000" placeholder="What each service costs. Ranges are fine."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="jay.work"><label for="f_jay.work">Past work for the portfolio</label><textarea id="f_jay.work" maxlength="4000" placeholder="Sites, builds and clients, with links where you have them."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div></div><details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="page-jay"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="page-jay">Add</button></div></details>
+        <div class="fields"><div class="fld" data-field="jay.services"><label for="f_jay.services">Services Jay offers</label><textarea id="f_jay.services" maxlength="4000" placeholder="Jay, list what you sell. One per line."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="jay.prices"><label for="f_jay.prices">Prices</label><textarea id="f_jay.prices" maxlength="4000" placeholder="What each service costs. Ranges are fine."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div><div class="fld" data-field="jay.work"><label for="f_jay.work">Past work for the portfolio</label><textarea id="f_jay.work" maxlength="4000" placeholder="Sites, builds and clients, with links where you have them."></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div></div><div class="imgwrap"><div class="imgs" data-imgs="page-jay"></div><button type="button" class="addimg" data-for="page-jay">Add image</button><span class="imghint">or paste a screenshot here</span></div><details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="page-jay"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="page-jay">Add</button></div></details>
       </div></div>
     </div>
   </section>
@@ -419,7 +451,7 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
 
   <section id="open">
     <div class="sec-head"><h2>6 · Open notes</h2><span class="hint">anything that does not belong to one card: ideas, links, objections</span></div>
-    <ul class="notes" id="opennotes" style="max-width:72ch"></ul>
+    <ul class="notes" id="opennotes" style="max-width:72ch"></ul><div class="imgwrap" style="max-width:72ch"><div class="imgs" data-imgs="open"></div><button type="button" class="addimg" data-for="open">Add image</button><span class="imghint">or paste a screenshot anywhere on this page</span></div>
     <div class="addnote" style="max-width:72ch;margin-top:12px">
       <select id="openkind" aria-label="note kind"><option value="take">Idea</option><option value="not">Objection</option></select>
       <input id="opentext" maxlength="400" placeholder="write it, then press add" aria-label="open note text">
@@ -451,7 +483,7 @@ document.querySelectorAll('.ratios').forEach(el=>{
 });
 
 /* ---------- identity ---------- */
-const SHELL = 5;
+const SHELL = 6;
 const $ = q => document.querySelector(q);
 const $$ = q => [...document.querySelectorAll(q)];
 const esc = x => String(x).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -493,19 +525,25 @@ function offline(msg){ live=false; setSync('', 'offline'); $('#offline').style.d
 
 /* --- fields --- */
 function fldEl(f){ return document.querySelector('.fld[data-field="'+CSS.escape(f)+'"]') }
+function showNewer(el, ta, row){
+  if (el.querySelector('.newer')) return;
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'newer';
+  b.textContent = row.author + ' changed this · load theirs';
+  b.addEventListener('click', () => {
+    ta.value = row.value; autosize(ta);
+    dirty.delete(row.field); pending.delete(row.field); draftClear(row.field);
+    paintSaveState(); b.remove();
+  });
+  el.querySelector('.fstat').after(b);
+}
 function paintField(row){
   const el = fldEl(row.field); if(!el) return;
   const ta = el.querySelector('textarea');
   const stat = el.querySelector('.fstat');
-  const mine = document.activeElement === ta;
-  if (mine && ta.value !== row.value){
-    if (!el.querySelector('.newer')){
-      const b=document.createElement('button');
-      b.type='button'; b.className='newer';
-      b.textContent = row.author + ' changed this · load';
-      b.addEventListener('click', ()=>{ ta.value=row.value; autosize(ta); b.remove(); });
-      stat.after(b);
-    }
+  // NEVER destroy text that has not reached the server yet.
+  if (dirty.has(row.field)){
+    if (ta.value !== row.value) showNewer(el, ta, row);
     return;
   }
   ta.value = row.value;
@@ -515,31 +553,204 @@ function paintField(row){
 }
 function autosize(ta){ ta.style.height='auto'; ta.style.height=Math.max(64, ta.scrollHeight+2)+'px' }
 
+/* ---- durable saving ------------------------------------------------------
+   Three layers, because any one of them can fail:
+   1. every keystroke goes to this browser's own storage immediately
+   2. a queue keeps retrying the server until the write lands
+   3. closing the tab fires one last write that outlives the page          */
+const DRAFT = 'mpb:draft:';
+const dirty = new Set();
+const pending = new Map();
+let flushing = false, token = null;
+
+const draftSet = (f,v) => { try { localStorage.setItem(DRAFT+f, v) } catch(e){} };
+const draftGet = f => { try { return localStorage.getItem(DRAFT+f) } catch(e){ return null } };
+const draftClear = f => { try { localStorage.removeItem(DRAFT+f) } catch(e){} };
+
+function paintSaveState(){
+  const el = $('#saved'); if(!el) return;
+  const n = pending.size;
+  el.textContent = n === 0 ? 'all saved' : (n + (n===1?' change not saved':' changes not saved'));
+  el.className = n === 0 ? 'ok' : 'warn';
+}
+function markDirty(f, v){
+  dirty.add(f); pending.set(f, v); draftSet(f, v);
+  const st = fldEl(f) && fldEl(f).querySelector('.fstat');
+  if(st){ st.textContent = 'saving'; st.className = 'fstat saving' }
+  paintSaveState();
+}
+async function flush(){
+  if(flushing || !sb || !live || !me || !pending.size) return;
+  flushing = true;
+  for(const [f, v] of [...pending]){
+    try {
+      const { error } = await sb.from('agents_board_fields')
+        .upsert({ field:f, value:v, author:me, updated_at:new Date().toISOString() });
+      if(error) continue;
+      sb.from('agents_board_history').insert({ field:f, value:v, author:me });
+      if(pending.get(f) === v){            // nothing newer typed while it was in flight
+        pending.delete(f); dirty.delete(f); draftClear(f);
+        const st = fldEl(f) && fldEl(f).querySelector('.fstat');
+        if(st){ st.textContent = 'saved · ' + me + ' · just now'; st.className = 'fstat saved' }
+      }
+    } catch(e){ /* stay pending, try again */ }
+  }
+  flushing = false;
+  paintSaveState();
+}
+function flushKeepalive(){
+  if(!pending.size || !me || !token) return;
+  const rows = [...pending].map(([f,v]) =>
+    ({ field:f, value:v, author:me, updated_at:new Date().toISOString() }));
+  try {
+    fetch(SB_URL + '/rest/v1/agents_board_fields', {
+      method:'POST', keepalive:true,
+      headers:{ apikey:SB_KEY, Authorization:'Bearer '+token,
+                'Content-Type':'application/json', Prefer:'resolution=merge-duplicates' },
+      body: JSON.stringify(rows)
+    });
+  } catch(e){}
+}
+addEventListener('pagehide', flushKeepalive);
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'hidden') flushKeepalive(); else flush();
+});
+addEventListener('beforeunload', e => { if(pending.size){ e.preventDefault(); e.returnValue = '' } });
+
 async function loadFields(){
   const { data, error } = await sb.from('agents_board_fields').select('*');
   if (error) return;
-  (data||[]).forEach(r => { if(r.field.charAt(0) !== '_') paintField(r);
-    if(r.field === '__shell' && Number(r.value) > SHELL) $('#stale').style.display='block'; });
+  (data||[]).forEach(r => {
+    if(r.field.charAt(0) !== '_') paintField(r);
+    if(r.field === '__shell' && Number(r.value) > SHELL) $('#stale').style.display = 'block';
+  });
+  recoverDrafts();
 }
+function recoverDrafts(){
+  $$('.fld').forEach(el => {
+    const f = el.dataset.field, d = draftGet(f);
+    if(d === null) return;
+    const ta = el.querySelector('textarea');
+    if(d === ta.value){ draftClear(f); return; }
+    ta.value = d; autosize(ta);
+    markDirty(f, d);
+    const st = el.querySelector('.fstat');
+    st.textContent = 'unsaved text recovered, saving'; st.className = 'fstat recovered';
+  });
+  if(pending.size) flush();
+}
+
 const timers = {};
-function queueSave(f, v){
-  clearTimeout(timers[f]);
-  const el = fldEl(f), stat = el.querySelector('.fstat');
-  stat.textContent = 'saving'; stat.className = 'fstat saving';
-  timers[f] = setTimeout(async () => {
-    if(!sb || !live || !me){ stat.textContent='not saved, offline'; stat.className='fstat'; return }
-    const { error } = await sb.from('agents_board_fields')
-      .upsert({ field:f, value:v, author:me, updated_at:new Date().toISOString() });
-    stat.textContent = error ? 'not saved, retry' : ('saved · ' + me + ' · just now');
-    stat.className = 'fstat' + (error ? '' : ' saved');
-  }, 700);
-}
 $$('.fld textarea').forEach(ta => {
   const f = ta.closest('.fld').dataset.field;
-  ta.addEventListener('input', () => { autosize(ta); queueSave(f, ta.value) });
-  ta.addEventListener('focus', () => { editing.add(f); track() });
-  ta.addEventListener('blur',  () => { editing.delete(f); track();
+  ta.addEventListener('input', () => {
+    autosize(ta); markDirty(f, ta.value);
+    clearTimeout(timers[f]); timers[f] = setTimeout(flush, 700);
+  });
+  ta.addEventListener('focus', () => { editing.add(f); lastSection = sectionOf(ta); track() });
+  ta.addEventListener('blur',  () => { editing.delete(f); track(); flush();
     const n = ta.closest('.fld').querySelector('.newer'); if(n) n.remove(); });
+});
+setInterval(flush, 4000);
+
+/* ---- pasted and dropped images ---- */
+let lastSection = 'open';
+function sectionOf(node){
+  const card = node.closest('.opt');
+  const strip = card && card.querySelector('[data-imgs]');
+  return strip ? strip.dataset.imgs : 'open';
+}
+let toastT;
+function toast(msg){
+  const t = $('#toast'); if(!t) return;
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove('show'), 2600);
+}
+async function shrink(file){
+  try {
+    const bmp = await createImageBitmap(file);
+    const max = 1600;
+    if(bmp.width <= max && bmp.height <= max && file.size < 900000) return file;
+    const k = Math.min(1, max / Math.max(bmp.width, bmp.height));
+    const c = document.createElement('canvas');
+    c.width = Math.round(bmp.width*k); c.height = Math.round(bmp.height*k);
+    c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+    return await new Promise(r => c.toBlob(b => r(b || file), 'image/webp', 0.88));
+  } catch(e){ return file }
+}
+async function uploadImage(file, section){
+  if(!live || !sb) { toast('not connected, image not added'); return }
+  if(!me) { toast('choose who you are first'); return }
+  if(!/^image\//.test(file.type)) { toast('that is not an image'); return }
+  if(file.size > 10*1024*1024) { toast('image is too big, keep it under 10MB'); return }
+  toast('adding image');
+  const blob = await shrink(file);
+  const ext = (blob.type.split('/')[1] || 'png').replace('jpeg','jpg');
+  const path = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8) + '.' + ext;
+  const up = await sb.storage.from('board-images')
+    .upload(path, blob, { contentType: blob.type, upsert:false });
+  if(up.error){ toast('image did not upload, try again'); return }
+  const ins = await sb.from('agents_board_images').insert({ section, path, author: me });
+  if(ins.error){ toast('image did not save, try again'); return }
+  toast('image added');
+  loadImages();
+}
+async function loadImages(){
+  if(!sb) return;
+  const { data, error } = await sb.from('agents_board_images').select('*').order('created_at');
+  if(error || !data) return;
+  let signed = {};
+  if(data.length){
+    const { data: sg } = await sb.storage.from('board-images')
+      .createSignedUrls(data.map(r => r.path), 3600);
+    (sg||[]).forEach(x => { if(x.path && x.signedUrl) signed[x.path] = x.signedUrl });
+  }
+  $$('[data-imgs]').forEach(c => c.innerHTML = '');
+  data.forEach(r => {
+    const c = document.querySelector('[data-imgs="'+CSS.escape(r.section)+'"]');
+    const u = signed[r.path];
+    if(!c || !u) return;
+    c.insertAdjacentHTML('beforeend',
+      '<figure><img src="'+u+'" alt="reference added by '+esc(r.author)+'" loading="lazy">'
+      + '<figcaption><span>'+esc(r.author)+'</span>'
+      + '<button type="button" class="imgdel" data-del="'+esc(r.id)+'" data-path="'+esc(r.path)+'">remove</button>'
+      + '</figcaption></figure>');
+  });
+}
+document.addEventListener('paste', e => {
+  const files = [...((e.clipboardData && e.clipboardData.files) || [])]
+    .filter(f => /^image\//.test(f.type));
+  if(!files.length) return;
+  e.preventDefault();
+  files.forEach(f => uploadImage(f, lastSection));
+});
+$$('[data-imgs]').forEach(strip => {
+  const card = strip.closest('.opt') || strip.parentElement;
+  card.addEventListener('dragover', e => { e.preventDefault(); card.classList.add('dropping') });
+  card.addEventListener('dragleave', () => card.classList.remove('dropping'));
+  card.addEventListener('drop', e => {
+    e.preventDefault(); card.classList.remove('dropping');
+    [...(e.dataTransfer.files||[])].forEach(f => uploadImage(f, strip.dataset.imgs));
+  });
+});
+document.addEventListener('click', async e => {
+  const add = e.target.closest('.addimg');
+  if(add){ lastSection = add.dataset.for; $('#filepick').click(); return }
+  const del = e.target.closest('.imgdel');
+  if(del){
+    if(!live || !me) return;
+    await sb.from('agents_board_images').delete().eq('id', del.dataset.del);
+    await sb.storage.from('board-images').remove([del.dataset.path]);
+    toast('image removed'); loadImages(); return;
+  }
+  const shot = e.target.closest('.imgs img');
+  if(shot){ const lb = $('#lightbox'); lb.querySelector('img').src = shot.src; lb.classList.add('on'); return }
+  if(e.target.closest('#lightbox')) $('#lightbox').classList.remove('on');
+});
+addEventListener('keydown', e => { if(e.key === 'Escape') $('#lightbox').classList.remove('on') });
+$('#filepick').addEventListener('change', ev => {
+  [...ev.target.files].forEach(f => uploadImage(f, lastSection));
+  ev.target.value = '';
 });
 
 /* --- notes --- */
@@ -625,7 +836,7 @@ async function connect(){
     const notes = await sb.from('agents_board_notes').select('*').order('created_at');
     if(notes.error) throw notes.error;
     (notes.data||[]).forEach(renderNote);
-    await loadFields(); await loadVotes(); await loadLocks();
+    await loadFields(); await loadVotes(); await loadLocks(); await loadImages();
 
     sb.channel('board-db')
       .on('postgres_changes',{event:'*',schema:'public',table:'agents_board_presence'}, loadPeers)
@@ -634,6 +845,7 @@ async function connect(){
           p => { const r=p.new; if(r && r.field && r.field.charAt(0)!=='_') paintField(r) })
       .on('postgres_changes',{event:'*',schema:'public',table:'agents_board_votes'}, loadVotes)
       .on('postgres_changes',{event:'*',schema:'public',table:'agents_board_locks'}, loadLocks)
+      .on('postgres_changes',{event:'*',schema:'public',table:'agents_board_images'}, loadImages)
       .subscribe();
 
     live = true; setSync('on','live'); paintMe();
@@ -654,8 +866,10 @@ async function boot(){
     auth:{ persistSession:true, autoRefreshToken:true, storageKey:'mpower-board-auth' },
     realtime:{ params:{ eventsPerSecond: 8 } }
   });
+  sb.auth.onAuthStateChange((_e, sess) => { token = sess ? sess.access_token : null });
   const { data:{ session } } = await sb.auth.getSession();
   if(!session){ showGate(); return }
+  token = session.access_token;
   try { sb.realtime.setAuth(session.access_token) } catch(e){}
   await connect();
 }
@@ -674,7 +888,8 @@ document.getElementById('gateform').addEventListener('submit', async ev => {
     const f = document.getElementById('gatepw'); f.value=''; f.focus();
     return;
   }
-  try { sb.realtime.setAuth(data.session.access_token) } catch(e){}
+  token = data.session.access_token;
+  try { sb.realtime.setAuth(token) } catch(e){}
   document.getElementById('gate').hidden = true;
   await connect();
 });
@@ -724,3 +939,5 @@ setInterval(beat, 9000);
 setInterval(loadPeers, 11000);
 setInterval(sweep, 300000);
 </script>
+
+<input type="file" id="filepick" accept="image/*" multiple hidden>
