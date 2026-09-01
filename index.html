@@ -735,7 +735,7 @@ $$('[data-imgs]').forEach(strip => {
 });
 document.addEventListener('click', async e => {
   const add = e.target.closest('.addimg');
-  if(add){ lastSection = add.dataset.for; $('#filepick').click(); return }
+  if(add){ lastSection = add.dataset.for; filepick.click(); return }
   const del = e.target.closest('.imgdel');
   if(del){
     if(!live || !me) return;
@@ -748,7 +748,14 @@ document.addEventListener('click', async e => {
   if(e.target.closest('#lightbox')) $('#lightbox').classList.remove('on');
 });
 addEventListener('keydown', e => { if(e.key === 'Escape') $('#lightbox').classList.remove('on') });
-$('#filepick').addEventListener('change', ev => {
+let filepick = document.getElementById('filepick');
+if(!filepick){
+  filepick = document.createElement('input');
+  filepick.type = 'file'; filepick.accept = 'image/*'; filepick.multiple = true;
+  filepick.hidden = true; filepick.id = 'filepick';
+  document.body.appendChild(filepick);
+}
+filepick.addEventListener('change', ev => {
   [...ev.target.files].forEach(f => uploadImage(f, lastSection));
   ev.target.value = '';
 });
@@ -939,5 +946,3 @@ setInterval(beat, 9000);
 setInterval(loadPeers, 11000);
 setInterval(sweep, 300000);
 </script>
-
-<input type="file" id="filepick" accept="image/*" multiple hidden>
