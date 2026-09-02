@@ -641,18 +641,23 @@ function recoverDrafts(){
   if(pending.size) flush();
 }
 
-const timers = {};
+const timers = {}, lastPush = {};
 $$('.fld textarea').forEach(ta => {
   const f = ta.closest('.fld').dataset.field;
   ta.addEventListener('input', () => {
     autosize(ta); markDirty(f, ta.value);
-    clearTimeout(timers[f]); timers[f] = setTimeout(flush, 700);
+    clearTimeout(timers[f]);
+    // Save the FIRST keystroke of a burst immediately, so there is no window
+    // in which a closed tab loses everything. The rest is debounced.
+    const now = Date.now();
+    if(!lastPush[f] || now - lastPush[f] > 1500){ lastPush[f] = now; flush(); }
+    else timers[f] = setTimeout(() => { lastPush[f] = Date.now(); flush() }, 700);
   });
   ta.addEventListener('focus', () => { editing.add(f); lastSection = sectionOf(ta); track() });
   ta.addEventListener('blur',  () => { editing.delete(f); track(); flush();
     const n = ta.closest('.fld').querySelector('.newer'); if(n) n.remove(); });
 });
-setInterval(flush, 4000);
+setInterval(flush, 2000);
 
 /* ---- pasted and dropped images ---- */
 let lastSection = 'open';
