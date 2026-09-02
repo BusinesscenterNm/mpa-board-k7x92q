@@ -539,6 +539,13 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
       <p style="max-width:72ch">And <b>three roles, not two</b>. Heading and body were always named; the subheading was improvised on every build. It is where a third weight, a mono or a condensed cut earns its place.</p>
       <details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="direction"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="direction">Add</button></div></details>
     </section>
+    <section id="pages">
+      <div class="sec-head"><h2>12 &middot; Every page, beside the best</h2><span class="hint">the per-page sweep, every page next to the rivals' same page</span></div>
+      <p style="max-width:72ch">A home page proves nothing about a site. This section walks every page we will have, puts the same page from the best competitors beside it, and names what to add on each. <b>NOT YET RUN for MPower Agents</b>, stated rather than silent: this is a new build with no live pages yet, so the sweep runs the moment the sitemap in section 5 is agreed. It is generated from real photographs of every page by <code>page-match.py</code>, never typed from memory.</p>
+      <div class="fields"><div class="fld" data-field="pages.sitemap"><label for="f_pages">Which pages will the site have? One per line, so the sweep knows what to photograph on the rivals</label><textarea id="f_pages" maxlength="4000" placeholder="home, services, pricing, about, contact, case studies, careers"></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div></div>
+      <details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="pages"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="pages">Add</button></div></details>
+    </section>
+
 <section id="open">
     <div class="sec-head"><h2>11 &middot; Open notes</h2><span class="hint">anything that does not belong to one card: ideas, links, objections</span></div>
     <ul class="notes" id="opennotes" style="max-width:72ch"></ul><div class="imgwrap" style="max-width:72ch"><div class="imgs" data-imgs="open"></div><button type="button" class="addimg" data-for="open">Add image</button><span class="imghint">or paste a screenshot anywhere on this page</span></div>
@@ -575,7 +582,7 @@ document.querySelectorAll('.ratios').forEach(el=>{
 });
 
 /* ---------- identity ---------- */
-const SHELL = 9;
+const SHELL = 10;
 const $ = q => document.querySelector(q);
 const $$ = q => [...document.querySelectorAll(q)];
 const esc = x => String(x).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
