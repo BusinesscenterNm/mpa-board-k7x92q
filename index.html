@@ -82,6 +82,8 @@ section{padding:56px 0 12px}
 .f-archivo .h{font-family:'Archivo';font-stretch:125%;font-weight:800}
 .f-sora .h{font-family:'Sora';font-weight:700}
 .f-clash .h{font-family:'Clash Display';font-weight:600}
+  .f-instrument .h{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em}
+  .f-mono .h{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:600;letter-spacing:-.03em}
 
 /* reference wall */
 .refgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px;margin-top:18px}
@@ -193,7 +195,7 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
 #lightbox img{max-width:100%;max-height:100%;border-radius:10px}
 .fstat.recovered{color:var(--amber)}
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Sora:wght@400..800&family=IBM+Plex+Mono:wght@400;600&family=Hanken+Grotesk:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Sora:wght@400..800&family=IBM+Plex+Mono:wght@400;600&family=Hanken+Grotesk:wght@400;600&family=Instrument+Serif&display=swap">
 
 <div class="bar"><div class="wrap">
   <b>MPower Agents · Mood Board</b>
@@ -260,7 +262,7 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
   </section>
 
   <section id="palette">
-    <div class="sec-head"><h2>2 · The palette</h2><span class="hint">three options, all drawn from MPower's own locked tokens. Jordan locks the winner.</span></div>
+    <div class="sec-head"><h2>2 · The palette</h2><span class="hint">five options. Vote for the one you want. Jordan locks the winner.</span></div>
     <div class="grid3">
 
       <div class="opt" data-choice="agents-day" data-section="palette">
@@ -299,6 +301,32 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
           <p>Warmer and more human than either blue. The amber at button size needs the darkened derivative shown here, because the raw brand amber fails contrast on light ground.</p>
           <div class="ratios" data-pairs="cloud-ember"></div>
           <div class="voterow"><button class="vote" type="button">Vote for this</button><div class="tally"></div></div>
+
+      <div class="opt" data-choice="instrument" data-section="palette">
+        <div class="swatch" style="background:#0b0f0d;color:#e8efe9">
+          <div class="big">Instrument</div>
+          <div class="sub" style="color:#9fb3a6">Near black with one signal green. The readout of a machine that is running.</div>
+          <a class="btn" style="background:#3ddc84;color:#06110b">Book a call</a>
+        </div>
+        <div class="meta">
+          <p>The only option here that reads technical rather than reassuring. Green is the colour of a system reporting that it works, which is what we sell. It is also the furthest from what every other agency in this category is doing.</p>
+          <div class="ratios" data-pairs="instrument"></div>
+          <div class="voterow"><button class="vote" type="button">Vote for this</button><div class="tally"></div></div>
+        </div>
+      </div>
+
+      <div class="opt" data-choice="carbon" data-section="palette">
+        <div class="swatch" style="background:#0d0d0f;color:#efeeec">
+          <div class="big">Carbon</div>
+          <div class="sub" style="color:#9d9c9a">No colour at all. The signature touch is its absence.</div>
+          <a class="btn" style="background:#ffffff;color:#0d0d0f">Book a call</a>
+        </div>
+        <div class="meta">
+          <p>The most contained option, and the one the declared style argues for hardest: no section shouts, so the single white button is the loudest thing on the page. Nothing to get wrong, and nothing to date.</p>
+          <div class="ratios" data-pairs="carbon"></div>
+          <div class="voterow"><button class="vote" type="button">Vote for this</button><div class="tally"></div></div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
@@ -331,7 +359,7 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
   </section>
 
   <section id="type">
-    <div class="sec-head"><h2>4 · The headline face</h2><span class="hint">the anchor sets the personality of every page. Real renders below, not names.</span></div>
+    <div class="sec-head"><h2>4 · The headline face</h2><span class="hint">five options, and every one is set in its own real face below. The anchor sets the personality of every page. Vote for the one you want.</span></div>
     <div class="grid3">
       <div class="opt sheet f-archivo" data-choice="archivo-expanded" data-section="anchor">
         <div class="demo"><span class="role">heading · Archivo Expanded</span><div class="h">We build the systems behind the business.</div><span class="role">subheading · IBM Plex Mono</span><div class="s">Automation, built around people</div><span class="role">body · Archivo</span><p class="b">One family at two widths, so there are zero seams between display and text. The engineered look, and it already pairs with the mono doing labels across this board. The safest triad of the three.</p></div>
@@ -343,7 +371,17 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
       </div>
       <div class="opt sheet f-clash" data-choice="clash-display" data-section="anchor">
         <div class="demo"><span class="role">heading · Clash Display</span><div class="h">We build the systems behind the business.</div><span class="role">subheading · IBM Plex Mono</span><div class="s">Automation, built around people</div><span class="role">body · Hanken Grotesk</span><p class="b f-hanken">The most personality of the three and the face most likely to get asked about. Display only, so the body comes from a neutral partner, shown here at its real reading size across a real paragraph.</p></div>
+        <div class="meta"><div class="voterow"><button class="vote" type="button">Vote for this</button><div class="tally"></div></div>
+
+      <div class="opt sheet f-instrument" data-choice="instrument-serif" data-section="anchor">
+        <div class="demo"><span class="role">heading &middot; Instrument Serif</span><div class="h">We build the systems behind the business.</div><span class="role">subheading &middot; IBM Plex Mono</span><div class="s">Automation, built around people</div><span class="role">body &middot; Hanken Grotesk</span><p class="b">The only serif on the list, so it is the only one that looks different from across the room. Reads considered and editorial rather than engineered, which is the opposite bet from the other four. Use it if we want to read like people who think, not like a product.</p></div>
         <div class="meta"><div class="voterow"><button class="vote" type="button">Vote for this</button><div class="tally"></div></div></div>
+      </div>
+
+      <div class="opt sheet f-mono" data-choice="plex-mono" data-section="anchor">
+        <div class="demo"><span class="role">heading &middot; IBM Plex Mono</span><div class="h">We build the systems behind the business.</div><span class="role">subheading &middot; IBM Plex Mono</span><div class="s">Automation, built around people</div><span class="role">body &middot; Hanken Grotesk</span><p class="b">A mono anchor, where every letter sits on the same rhythm. The most technical option on the board and the one that says software loudest. It is already doing the labels here, so the whole board is a preview of it.</p></div>
+        <div class="meta"><div class="voterow"><button class="vote" type="button">Vote for this</button><div class="tally"></div></div></div>
+      </div></div>
       </div>
     </div>
     <div class="lockrow"><button class="lock" type="button" data-lock="anchor">Lock the anchor (Jordan's call)</button><span class="locked" data-lockmsg="anchor"></span></div>
@@ -472,6 +510,8 @@ const PAIRS = {
   "agents-day":       [["accent on ground","#2d82fc","#fafcfe",false],["ink on ground","#0e1730","#fafcfe",true],["white on accent","#ffffff","#2d82fc",false]],
   "midnight-boardroom":[["accent on ground","#2e9be6","#0e1730",false],["ink on ground","#f4f8fc","#0e1730",true],["ink on accent","#06101f","#2e9be6",false]],
   "cloud-ember":      [["ember text on ground","#b04b0a","#f4f8fc",true],["ink on ground","#233049","#f4f8fc",true],["white on ember","#ffffff","#b04b0a",false]],
+  "instrument":      [["accent on ground","#3ddc84","#0b0f0d",false],["ink on ground","#e8efe9","#0b0f0d",true],["ink on accent","#06110b","#3ddc84",false]],
+  "carbon":          [["accent on ground","#ffffff","#0d0d0f",false],["ink on ground","#efeeec","#0d0d0f",true],["ground on accent","#0d0d0f","#ffffff",false]],
 };
 function lum(hex){const c=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255).map(v=>v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2]}
 function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05)}
