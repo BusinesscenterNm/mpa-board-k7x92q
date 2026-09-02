@@ -836,9 +836,14 @@ async function sweep(){
   try { await sb.from('agents_board_presence').delete().lt('seen_at', cutoff) } catch(e){}
 }
 window.addEventListener('pagehide', () => {
-  try { navigator.sendBeacon(
-    SB_URL + '/rest/v1/agents_board_presence?peer=eq.' + PEER,
-    new Blob([JSON.stringify({ seen_at:'1970-01-01T00:00:00Z' })], { type:'application/json' })) } catch(e){}
+  // sendBeacon cannot carry the auth headers this needs, so use keepalive fetch
+  if(!token) return;
+  try {
+    fetch(SB_URL + '/rest/v1/agents_board_presence?peer=eq.' + PEER, {
+      method:'DELETE', keepalive:true,
+      headers:{ apikey:SB_KEY, Authorization:'Bearer '+token }
+    });
+  } catch(e){}
 });
 
 const BOARD_EMAIL = 'board@mpoweragents.ai';
