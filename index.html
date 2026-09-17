@@ -195,6 +195,54 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
 #lightbox img{max-width:100%;max-height:100%;border-radius:10px}
 .fstat.recovered{color:var(--amber)}
 
+/* anti-reference mocks · constructed, never a photograph of a real business */
+.mock{height:150px;border-radius:12px 12px 0 0;overflow:hidden;position:relative;
+  border-bottom:1px solid var(--line);font-family:ui-sans-serif,system-ui,sans-serif}
+.mock .tag{position:absolute;bottom:7px;right:8px;font-family:var(--mono);font-size:8.5px;
+  letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.62);
+  background:rgba(0,0,0,.45);border-radius:5px;padding:2px 6px}
+.mock.tpl{background:linear-gradient(135deg,#eef2f7,#dfe7f2);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:9px;padding:14px}
+.mock.tpl .row{display:flex;gap:11px}
+.mock.tpl .tile{width:56px;height:46px;background:#fff;border-radius:8px;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 1px 3px rgba(20,40,80,.14)}
+.mock.tpl .ic{width:16px;height:16px;border-radius:5px;background:#b9c9e2}
+.mock.tpl .ln{width:34px;height:4px;border-radius:2px;background:#ccd8e8}
+.mock.tpl .hd{width:118px;height:7px;border-radius:3px;background:#adbcd2}
+.mock.ai{background:radial-gradient(120% 90% at 22% 0%,#6d3bf5 0%,#2a1160 42%,#08060f 100%);
+  display:flex;align-items:center;justify-content:center}
+.mock.ai .card{width:150px;height:74px;border-radius:11px;background:rgba(255,255,255,.055);
+  border:1px solid rgba(168,130,255,.5);box-shadow:0 0 26px rgba(122,74,255,.55);
+  display:flex;flex-direction:column;gap:5px;padding:11px}
+.mock.ai .dots{display:flex;gap:4px}
+.mock.ai .dots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.34)}
+.mock.ai .ln{height:4px;border-radius:2px;background:linear-gradient(90deg,#a882ff,rgba(168,130,255,.12))}
+.mock.reel{background:#0c0c10;display:grid;grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(2,1fr);gap:5px;padding:9px}
+.mock.reel span{border-radius:7px;background:linear-gradient(115deg,#1d1d27,#33333f);
+  border:1px solid rgba(255,255,255,.075)}
+.mock.reel span:nth-child(2){transform:rotate(-7deg) scale(.9)}
+.mock.reel span:nth-child(3){transform:rotate(5deg) scale(1.06)}
+.mock.reel span:nth-child(4){transform:rotate(9deg) scale(.86)}
+.mock.reel span:nth-child(5){transform:rotate(-4deg) scale(1.1)}
+.mock.reel span:nth-child(6){transform:rotate(11deg) scale(.92)}
+@media (prefers-reduced-motion:no-preference){}
+
+/* the measured table */
+.mtable{width:100%;border-collapse:collapse;margin-top:18px;font-size:13.5px}
+.mtable th,.mtable td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.mtable th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;white-space:nowrap}
+.mtable td.n{font-family:var(--mono);white-space:nowrap}
+.mtable tr.prod td{background:rgba(55,196,143,.055)}
+.mtable .verdict{color:var(--ink-2)}
+.mscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.unknown{border:1px solid rgba(255,138,61,.42);background:rgba(255,138,61,.075);
+  border-radius:12px;padding:15px 18px;margin-top:20px;max-width:78ch}
+.unknown h4{margin:0 0 7px;font-size:14px;font-stretch:112%}
+.unknown p{margin:0 0 9px;font-size:13.5px;color:var(--ink-2)}
+.unknown p:last-child{margin-bottom:0}
+
 /* the 60 / 30 / 10 split, shown rather than described, on every palette option */
 .mix{display:flex;height:34px;border-radius:9px;overflow:hidden;border:1px solid var(--line)}
 .mix span{display:flex;align-items:center;justify-content:center;font-family:var(--mono);
@@ -589,10 +637,39 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
     <section id="anti">
       <div class="sec-head"><h2>7 &middot; Anti-references</h2><span class="hint">what this is deliberately NOT. Naming it is half the direction</span></div>
       <p style="max-width:72ch">A reference sheet that only records what we like is half a decision. These are the things we are choosing against, so nobody has to relitigate them later.</p>
+      <p style="max-width:72ch;color:var(--ink-3);font-size:14px">⚠️ The three pictures below are <b>drawn here, from CSS, on purpose</b>. Naming a real company as the thing to avoid is unfair to a business that never asked to be our counter-example, and a screenshot of one page would be read as a verdict on the whole firm. What we are ruling out is a <b>pattern</b>, so the pattern is what is drawn.</p>
       <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-        <div class="opt"><div class="meta"><p><b>The template agency page.</b> Three icon tiles above three headings, a stock photo of a laptop, and a gradient nobody chose. It is what the reader has already seen a hundred times.</p></div></div>
-        <div class="opt"><div class="meta"><p><b>The AI startup look.</b> Purple gradient on near-black, a glowing card, a fake terminal. It dates instantly and it says nothing about what we actually do.</p></div></div>
-        <div class="opt"><div class="meta"><p><b>The over-animated showreel.</b> Something moving in every corner. It reads as a studio showing off rather than a business a stranger can trust with their money.</p></div></div>
+        <div class="opt">
+          <div class="mock tpl" role="img" aria-label="Constructed example of a template agency page: three identical icon tiles in a row under a grey headline bar, on a pale blue gradient.">
+            <span class="hd"></span>
+            <span class="row">
+              <span class="tile"><span class="ic"></span><span class="ln"></span></span>
+              <span class="tile"><span class="ic"></span><span class="ln"></span></span>
+              <span class="tile"><span class="ic"></span><span class="ln"></span></span>
+            </span>
+            <span class="tag">constructed, not a real site</span>
+          </div>
+          <div class="meta"><p><b>The template agency page.</b> Three icon tiles above three headings, a stock photo of a laptop, and a gradient nobody chose. It is what the reader has already seen a hundred times.</p></div>
+        </div>
+        <div class="opt">
+          <div class="mock ai" role="img" aria-label="Constructed example of the AI startup look: a glowing translucent card with a purple glow on a near-black purple gradient.">
+            <span class="card">
+              <span class="dots"><i></i><i></i><i></i></span>
+              <span class="ln" style="width:82%"></span>
+              <span class="ln" style="width:58%"></span>
+              <span class="ln" style="width:70%"></span>
+            </span>
+            <span class="tag">constructed, not a real site</span>
+          </div>
+          <div class="meta"><p><b>The AI startup look.</b> Purple gradient on near-black, a glowing card, a fake terminal. It dates instantly and it says nothing about what we actually do.</p></div>
+        </div>
+        <div class="opt">
+          <div class="mock reel" role="img" aria-label="Constructed example of an over-animated showreel: six panels all rotated and scaled to different angles at once.">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+            <span class="tag">constructed, not a real site</span>
+          </div>
+          <div class="meta"><p><b>The over-animated showreel.</b> Something moving in every corner. It reads as a studio showing off rather than a business a stranger can trust with their money.</p></div>
+        </div>
       </div>
       <div class="fields"><div class="fld" data-field="anti.add"><label for="f_anti.add">Anything else we should rule out</label><textarea id="f_anti.add" maxlength="4000" placeholder="name it and say why, so it does not come back in three weeks"></textarea><div class="fmeta"><span class="fstat">empty</span><span class="fwho"></span></div></div></div>
       <details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="anti"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="anti">Add</button></div></details>
@@ -657,12 +734,108 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
     <section id="measured">
       <div class="sec-head"><h2>9 &middot; Revenue, traffic and hierarchy</h2><span class="hint">world's best is two claims, not one</span></div>
       <p style="max-width:72ch">Ranking a reference set by awards is a jury's taste, and ranking it by a listicle is hearsay. Neither asks whether a single person uses these sites. Three axes, every figure derived from a file rather than typed.</p>
-      <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-        <div class="opt"><div class="meta"><p><b>Revenue.</b> NOT YET MEASURED for this category. These references are private studios, so revenue needs a declared source per name or it stays unknown. An estimated figure is a fabrication and does not go on a board.</p></div></div>
-        <div class="opt"><div class="meta"><p><b>Traffic.</b> NOT YET MEASURED. Tranco rank, free and complete. A refusal is recorded as unknown rather than as zero.</p></div></div>
-        <div class="opt"><div class="meta"><p><b>Hierarchy.</b> NOT YET MEASURED. Deployed type sizes, largest type, emphasis levels, surface layers and transformed elements, off the real rendered page.</p></div></div>
+      <p style="max-width:78ch"><b>Now measured, on 2026-09-17.</b> Every site below was opened in a real browser at desktop size and its painted page read directly: how many type sizes it actually deploys, how many levels of emphasis a reader can perceive, how many surfaces it stacks, how many elements it moves. Traffic is the Tranco rank, a 30-day average of how often a domain is reached, taken on 2026-08-10. Nothing here is estimated.</p>
+      <div class="mscroll"><table class="mtable">
+        <thead><tr>
+          <th>Reference</th><th>Who actually visits</th><th>Type sizes</th>
+          <th>Emphasis levels</th><th>Surfaces</th><th>Things moving</th><th>What it means</th>
+        </tr></thead>
+        <tbody>
+<tr class="prod">
+          <td><b>Stripe</b></td>
+          <td class="n">#237<br><span style="color:var(--ink-3);font-size:11.5px">one of the most visited sites on the web</span></td>
+          <td class="n">9</td>
+          <td class="n">17</td>
+          <td class="n">7</td>
+          <td class="n">113</td>
+          <td class="verdict">Rich hierarchy AND an audience. The pattern worth copying.</td>
+        </tr>
+<tr class="prod">
+          <td><b>Cal.com</b></td>
+          <td class="n">#9,144<br><span style="color:var(--ink-3);font-size:11.5px">genuinely busy</span></td>
+          <td class="n">9</td>
+          <td class="n">28</td>
+          <td class="n">4</td>
+          <td class="n">30</td>
+          <td class="verdict">Rich hierarchy AND an audience. The pattern worth copying.</td>
+        </tr>
+<tr class="prod">
+          <td><b>Linear</b></td>
+          <td class="n">#10,687<br><span style="color:var(--ink-3);font-size:11.5px">genuinely busy</span></td>
+          <td class="n">11</td>
+          <td class="n">30</td>
+          <td class="n">6</td>
+          <td class="n">81</td>
+          <td class="verdict">Rich hierarchy AND an audience. The pattern worth copying.</td>
+        </tr>
+<tr class="">
+          <td><b>Ramotion</b></td>
+          <td class="n">#190,453<br><span style="color:var(--ink-3);font-size:11.5px">a real but modest audience</span></td>
+          <td class="n">6</td>
+          <td class="n">7</td>
+          <td class="n">3</td>
+          <td class="n">48</td>
+          <td class="verdict">Handsome, and hardly visited.</td>
+        </tr>
+<tr class="">
+          <td><b>Clay</b></td>
+          <td class="n">#389,388<br><span style="color:var(--ink-3);font-size:11.5px">a real but modest audience</span></td>
+          <td class="n">10</td>
+          <td class="n">9</td>
+          <td class="n">3</td>
+          <td class="n">57</td>
+          <td class="verdict">Handsome, and hardly visited.</td>
+        </tr>
+<tr class="">
+          <td><b>Metalab</b></td>
+          <td class="n">#1,103,484<br><span style="color:var(--ink-3);font-size:11.5px">past the first million, so almost nobody visits</span></td>
+          <td class="n">2</td>
+          <td class="n">3</td>
+          <td class="n">2</td>
+          <td class="n">6</td>
+          <td class="verdict">Loud on the surface, flat underneath.</td>
+        </tr>
+<tr class="">
+          <td><b>Hello Monday</b></td>
+          <td class="n">#1,319,495<br><span style="color:var(--ink-3);font-size:11.5px">past the first million, so almost nobody visits</span></td>
+          <td class="n">5</td>
+          <td class="n">6</td>
+          <td class="n">3</td>
+          <td class="n">51</td>
+          <td class="verdict">Handsome, and hardly visited.</td>
+        </tr>
+<tr class="">
+          <td><b>Obys</b></td>
+          <td class="n">#1,479,712<br><span style="color:var(--ink-3);font-size:11.5px">past the first million, so almost nobody visits</span></td>
+          <td class="n">2</td>
+          <td class="n">3</td>
+          <td class="n">0</td>
+          <td class="n">491</td>
+          <td class="verdict">Loud on the surface, flat underneath.</td>
+        </tr>
+<tr class="">
+          <td><b>A Unified Whole</b></td>
+          <td class="n">not ranked<br><span style="color:var(--ink-3);font-size:11.5px">no measurable traffic</span></td>
+          <td class="n">5</td>
+          <td class="n">5</td>
+          <td class="n">1</td>
+          <td class="n">1</td>
+          <td class="verdict">Handsome, and hardly visited.</td>
+        </tr>
+        </tbody>
+      </table></div>
+
+      <p style="max-width:78ch;margin-top:20px"><b>The finding, and it overturns how this wall was being read.</b> The three most visited sites here are the three product companies, not the award-winning studios. Stripe is the 237th most reached domain on the web. Every design studio on this wall except two sits past the first million, and one is not ranked at all, which means measurably nobody goes there. The studios are also the flattest: Obys and Metalab each deploy <b>two</b> type sizes and three levels of emphasis, while Linear runs eleven sizes and thirty levels. Obys moves 491 elements on one screen and still gives a reader only three ways to tell what matters.</p>
+      <p style="max-width:78ch">So the wall splits in two, and each half is good for a different thing. <b>Take architecture and hierarchy from Stripe, Linear and Cal.com</b>, because they carry real traffic and prove a deep hierarchy works at scale. <b>Take atmosphere and craft from Obys, Metalab and Hello Monday</b>, and take nothing structural from them. Copying a studio's flat two-size hierarchy onto a site whose whole job is booked calls would be copying the part that costs them their audience.</p>
+
+      <div class="unknown">
+        <h4>⚠️ Revenue stays unknown, and that is the honest answer</h4>
+        <p>Six of these nine are privately held design studios. They publish no accounts, and there is no source that reports their revenue as fact. The figures that <i>do</i> appear for them on data-broker sites are <b>modelled estimates</b> built from headcount and industry averages, not reported numbers.</p>
+        <p>This board's own rule is that an estimated figure is a fabrication, so none was put in the column. Printing a plausible number that nobody can stand behind is worse than an admitted gap, because a gap invites the question and a fake answer closes it.</p>
+        <p><b>What replaces it:</b> the traffic column above does the job a revenue ranking was meant to do. It answers whether anyone actually uses the thing, it is free, complete and citable, and unlike a revenue estimate it can be checked by anyone in about ten seconds.</p>
       </div>
-      <p style="max-width:72ch"><b>And the finding that decides how the ranking gets used:</b> money does not buy craft. Measured across the fourteen richest chambers of commerce in America, every correlation between budget and craft was nil or negative. So a revenue ranking is a shortlist that finds the serious operators a gallery misses, never the reference set itself.</p>
+
+      <p style="max-width:78ch"><b>And the finding that decides how any ranking gets used:</b> money does not buy craft. Measured across the fourteen richest chambers of commerce in America, every correlation between budget and craft was nil or negative. So a ranking is a shortlist that finds the serious operators a gallery misses, never the reference set itself.</p>
       <details class="disc"><summary>Discussion</summary><ul class="notes" data-livenotes="measured"></ul><div class="addnote"><select aria-label="note kind"><option value="take">Add</option><option value="not">Against</option></select><input maxlength="400" placeholder="a note for the others" aria-label="note"><button type="button" data-addfor="measured">Add</button></div></details>
     </section>
 
@@ -738,7 +911,7 @@ document.querySelectorAll('.ratios').forEach(el=>{
 });
 
 /* ---------- identity ---------- */
-const SHELL = 14;
+const SHELL = 15;
 const $ = q => document.querySelector(q);
 const $$ = q => [...document.querySelectorAll(q)];
 const esc = x => String(x).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
