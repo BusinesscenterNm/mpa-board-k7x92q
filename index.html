@@ -195,6 +195,13 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
 #lightbox img{max-width:100%;max-height:100%;border-radius:10px}
 .fstat.recovered{color:var(--amber)}
 
+/* the 60 / 30 / 10 split, shown rather than described, on every palette option */
+.mix{display:flex;height:34px;border-radius:9px;overflow:hidden;border:1px solid var(--line)}
+.mix span{display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+  font-size:10px;letter-spacing:.1em;font-weight:600}
+.mixkey{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-3);margin-top:-2px}
+
 /* removing things · the control is quiet until you are on the thing it removes */
 .note{position:relative;padding-right:30px}
 .x{position:absolute;top:6px;right:7px;width:20px;height:20px;line-height:1;border-radius:6px;
@@ -325,10 +332,10 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
   </section>
 
   <section id="palette">
-    <div class="sec-head"><h2>2 &middot; The palette</h2><span class="hint">five options. Vote for the one you want. Jordan locks the winner.</span></div>
+    <div class="sec-head"><h2>2 &middot; The palette</h2><span class="hint">six options. Vote for the one you want. Jordan locks the winner.</span></div>
     <div class="grid3">
 
-      <div class="opt" data-choice="agents-day" data-section="palette">
+      <div class="opt" data-choice="agents-day" data-section="palette" data-mix="#fafcfe|#0e1730|#2d82fc">
         <div class="swatch" style="background:#fafcfe;color:#0e1730">
           <div class="big">Agents Day</div>
           <div class="sub" style="color:#3d4d6e">White ground, navy ink, the live royal blue kept as the accent.</div>
@@ -341,7 +348,7 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
         </div>
       </div>
 
-      <div class="opt" data-choice="midnight-boardroom" data-section="palette">
+      <div class="opt" data-choice="midnight-boardroom" data-section="palette" data-mix="#0e1730|#f4f8fc|#2e9be6">
         <div class="swatch" style="background:#0e1730;color:#f4f8fc">
           <div class="big">Midnight Boardroom</div>
           <div class="sub" style="color:#b7c5da">The events identity inverted to dark. Sky is the one accent.</div>
@@ -354,18 +361,31 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
         </div>
       </div>
 
-      <div class="opt" data-choice="cloud-ember" data-section="palette">
-        <div class="swatch" style="background:#f4f8fc;color:#233049">
+      <div class="opt" data-choice="cloud-ember" data-section="palette" data-mix="#f7ede7|#233049|#b04b0a">
+        <div class="swatch" style="background:#f7ede7;color:#233049">
           <div class="big">Cloud Ember</div>
-          <div class="sub" style="color:#51617f">Cloud ground, navy ink, the brand amber spent on one job per screen.</div>
+          <div class="sub" style="color:#51617f">Ember IS the ground now, not the accent. Navy ink, saturated ember kept for the one action.</div>
           <a class="btn" style="background:#b04b0a;color:#fff">Book a call</a>
         </div>
         <div class="meta">
-          <p>Warmer and more human than either blue. The amber at button size needs the darkened derivative shown here, because the raw brand amber fails contrast on light ground.</p>
+          <p><b>Ember at 60%, per Jordan.</b> The warmth carries the whole page instead of one button. Measured rather than eyeballed: at full strength the ember only takes white text, and the palette's own navy ink drops to 2.42 against a readable floor of 4.5, so the 60% is the ember tinted into the ground. Navy on it reads at 11.46 and the saturated ember still has somewhere to go.</p>
           <div class="ratios" data-pairs="cloud-ember"></div>
           <div class="voterow"><button class="vote" type="button">Vote for this</button><div class="tally"></div></div>
 
-      <div class="opt" data-choice="instrument" data-section="palette">
+      <div class="opt" data-choice="ember-deep" data-section="palette" data-mix="#301604|#f7ede7|#f0872d">
+        <div class="swatch" style="background:#301604;color:#f7ede7">
+          <div class="big">Ember Deep</div>
+          <div class="sub" style="color:#c9ab97">The same ember taken down instead of up. Warm near-black ground, the RAW brand amber finally usable.</div>
+          <a class="btn" style="background:#f0872d;color:#2a1304">Book a call</a>
+        </div>
+        <div class="meta">
+          <p><b>The other way to give ember 60%.</b> This is the one that also serves the dark field star and the mono anchor, so all three choices stop fighting each other. It is the only option on this board where the true brand amber <code>#f0872d</code> works as text, at 6.61 against a 4.5 floor. On light ground it fails and has to be darkened.</p>
+          <div class="ratios" data-pairs="ember-deep"></div>
+          <div class="voterow"><button class="vote" type="button">Vote for this</button><div class="tally"></div></div>
+        </div>
+      </div>
+
+      <div class="opt" data-choice="instrument" data-section="palette" data-mix="#0b0f0d|#e8efe9|#3ddc84">
         <div class="swatch" style="background:#0b0f0d;color:#e8efe9">
           <div class="big">Instrument</div>
           <div class="sub" style="color:#9fb3a6">Near black with one signal green. The readout of a machine that is running.</div>
@@ -378,7 +398,7 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
         </div>
       </div>
 
-      <div class="opt" data-choice="carbon" data-section="palette">
+      <div class="opt" data-choice="carbon" data-section="palette" data-mix="#0d0d0f|#efeeec|#ffffff">
         <div class="swatch" style="background:#0d0d0f;color:#efeeec">
           <div class="big">Carbon</div>
           <div class="sub" style="color:#9d9c9a">No colour at all. The signature touch is its absence.</div>
@@ -692,12 +712,30 @@ footer .cov{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}
 const PAIRS = {
   "agents-day":       [["accent on ground","#2d82fc","#fafcfe",false],["ink on ground","#0e1730","#fafcfe",true],["white on accent","#ffffff","#2d82fc",false]],
   "midnight-boardroom":[["accent on ground","#2e9be6","#0e1730",false],["ink on ground","#f4f8fc","#0e1730",true],["ink on accent","#06101f","#2e9be6",false]],
-  "cloud-ember":      [["ember text on ground","#b04b0a","#f4f8fc",true],["ink on ground","#233049","#f4f8fc",true],["white on ember","#ffffff","#b04b0a",false]],
+  "cloud-ember":      [["ember text on ground","#b04b0a","#f7ede7",true],["ink on ground","#233049","#f7ede7",true],["white on ember","#ffffff","#b04b0a",false]],
+  "ember-deep":       [["raw amber on ground","#f0872d","#301604",true],["ink on ground","#f7ede7","#301604",true],["ink on amber","#2a1304","#f0872d",false]],
   "instrument":      [["accent on ground","#3ddc84","#0b0f0d",false],["ink on ground","#e8efe9","#0b0f0d",true],["ink on accent","#06110b","#3ddc84",false]],
   "carbon":          [["accent on ground","#ffffff","#0d0d0f",false],["ink on ground","#efeeec","#0d0d0f",true],["ground on accent","#0d0d0f","#ffffff",false]],
 };
 function lum(hex){const c=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255).map(v=>v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2]}
 function ratio(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05)}
+/* 60 / 30 / 10 rendered from each option's own three colours, so the proportion
+   Jordan asked about is a thing you can see and compare rather than a sentence */
+document.querySelectorAll('.opt[data-mix]').forEach(c => {
+  const [ground, ink, accent] = c.dataset.mix.split('|');
+  const r = c.querySelector('.ratios');
+  if(!r) return;
+  const L = h => { const v=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255)
+    .map(x=>x<=.04045?x/12.92:Math.pow((x+.055)/1.055,2.4)); return .2126*v[0]+.7152*v[1]+.0722*v[2] };
+  const label = bg => L(bg) > 0.42 ? '#11161f' : '#ffffff';
+  r.insertAdjacentHTML('beforebegin',
+    '<div class="mixkey">the 60 / 30 / 10</div>'
+    + '<div class="mix" role="img" aria-label="sixty percent ground, thirty percent ink, ten percent accent">'
+    + '<span style="flex:60;background:'+ground+';color:'+label(ground)+'">60 GROUND</span>'
+    + '<span style="flex:30;background:'+ink+';color:'+label(ink)+'">30 INK</span>'
+    + '<span style="flex:10;background:'+accent+';color:'+label(accent)+'">10</span>'
+    + '</div>');
+});
 document.querySelectorAll('.ratios').forEach(el=>{
   (PAIRS[el.dataset.pairs]||[]).forEach(([label,fg,bg,isText])=>{
     const r=ratio(fg,bg), need=isText?4.5:3, ok=r>=need;
@@ -706,7 +744,7 @@ document.querySelectorAll('.ratios').forEach(el=>{
 });
 
 /* ---------- identity ---------- */
-const SHELL = 12;
+const SHELL = 13;
 const $ = q => document.querySelector(q);
 const $$ = q => [...document.querySelectorAll(q)];
 const esc = x => String(x).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
